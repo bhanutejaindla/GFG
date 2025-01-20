@@ -30,7 +30,6 @@ public:
     void push(int);
 };
 */
-int top=-1;
 void MyStack ::push(int x) {
     // Your Code
     top++;
@@ -41,8 +40,7 @@ void MyStack ::push(int x) {
 int MyStack ::pop() {
     // Your Code
     if(top==-1) return -1;
-    top--;
-    return arr[top+1];
+    return arr[top--];
     
 }
 
@@ -74,7 +72,7 @@ int main() {
                 cout << sq->pop() << " ";
             }
         }
-        cout << endl;
+        cout << "\n~\n";
         delete sq;
     }
     return 0;
