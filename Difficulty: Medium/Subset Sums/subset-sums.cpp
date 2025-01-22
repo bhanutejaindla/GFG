@@ -6,44 +6,61 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    void helper(vector<int>&arr,int ind,int sum,int n,vector<int>&ans)
+    void helper(int ind,vector<int>&ans,vector<int>&arr,int sum)
     {
         if(ind>=arr.size())
         {
             ans.push_back(sum);
             return ;
         }
-        helper(arr,ind+1,sum+arr[ind],n,ans);
-        helper(arr,ind+1,sum,n,ans);
+        helper(ind+1,ans,arr,sum+arr[ind]);
+        helper(ind+1,ans,arr,sum);
         return ;
     }
-    vector<int> subsetSums(vector<int> arr, int n) {
-        // Write Your Code here
+    vector<int> subsetSums(vector<int>& arr) {
+        // code here
         vector<int>ans;
-        helper(arr,0,0,n,ans);
+        int sum=0;
+        helper(0,ans,arr,sum);
+        sort(ans.begin(),ans.end());
         return ans;
     }
 };
 
 //{ Driver Code Starts.
+
 int main() {
-    int t;
+    int t; // Number of test cases
     cin >> t;
+    cin.ignore(); // Ignore the newline after the integer input
+
     while (t--) {
-        int N;
-        cin >> N;
-        vector<int> arr(N);
-        for (int i = 0; i < N; i++) {
-            cin >> arr[i];
+        vector<int> inputArray;
+        string inputLine;
+
+        // Input format: first number n followed by the array elements
+        getline(cin, inputLine);
+        stringstream inputStream(inputLine);
+        int num;
+        while (inputStream >> num) {
+            inputArray.push_back(num); // Read the array elements from input string
         }
-        Solution ob;
-        vector<int> ans = ob.subsetSums(arr, N);
-        sort(ans.begin(), ans.end());
-        for (auto sum : ans) {
-            cout << sum << " ";
+
+        Solution solutionObject;
+        vector<int> result = solutionObject.subsetSums(inputArray);
+        sort(result.begin(), result.end());
+
+        for (int i = 0; i < result.size(); i++) {
+            if (i != 0)
+                cout << " ";
+            cout << result[i];
         }
-        cout << endl;
+        cout
+            << endl
+            << "~\n"; // Print results in list format with new line after each test case
     }
+
     return 0;
 }
+
 // } Driver Code Ends
