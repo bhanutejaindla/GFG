@@ -6,23 +6,23 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    void helper(int ind,vector<int>&ans,vector<int>&arr,int sum)
+    void helper(int ind,vector<int>&arr,int sum,vector<int>&ans)
     {
         if(ind>=arr.size())
         {
             ans.push_back(sum);
             return ;
         }
-        helper(ind+1,ans,arr,sum+arr[ind]);
-        helper(ind+1,ans,arr,sum);
+        sum+=arr[ind];
+        helper(ind+1,arr,sum,ans);
+        sum-=arr[ind];
+        helper(ind+1,arr,sum,ans);
         return ;
     }
     vector<int> subsetSums(vector<int>& arr) {
         // code here
         vector<int>ans;
-        int sum=0;
-        helper(0,ans,arr,sum);
-        sort(ans.begin(),ans.end());
+        helper(0,arr,0,ans);
         return ans;
     }
 };
