@@ -4,28 +4,30 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
-    void helper(int ind,vector<int>&arr,int sum,vector<int>&ans)
+    void helper(vector<int>&arr,int ind,vector<int>&ans,vector<int>&v,int sum)
     {
         if(ind>=arr.size())
         {
-            ans.push_back(sum);
-            return ;
+          ans.push_back(sum);
+         return ;
         }
-        sum+=arr[ind];
-        helper(ind+1,arr,sum,ans);
-        sum-=arr[ind];
-        helper(ind+1,arr,sum,ans);
+        helper(arr,ind+1,ans,v,sum+arr[ind]);
+        helper(arr,ind+1,ans,v,sum);
         return ;
     }
     vector<int> subsetSums(vector<int>& arr) {
         // code here
+        sort(arr.begin(),arr.end());
         vector<int>ans;
-        helper(0,arr,0,ans);
+        vector<int>v;
+        helper(arr,0,ans,v,0);
         return ans;
     }
 };
+
 
 //{ Driver Code Starts.
 
